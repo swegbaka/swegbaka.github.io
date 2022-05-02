@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>CISC3140_LAB4</h1>
+    <h2>Insert new data record at bottom</h2>
+    <ul id="car"></ul>
+    <form >
+        <p>carID : </p>
+        <input type="text" name="carID" /><br/>
+        <p>Year : </p>
+        <input type="text" name="Year" ><br/>
+        <p>Make : </p>
+        <input type="text" name="Make" ><br/>
+        <p>Model : </p>
+        <input type="text" name="Model" ><br/>
+        <p>Ranking_TotalScore : </p>
+        <input type="integer" name="Ranking_TotalScore" ><br/>
+        <button name="button">SUBMIT</button>
+
+      </form>
+  
+    <script>
+
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                var response = JSON.parse(xhttp.responseText);
+                var car = response.car;
+
+                var output = '';
+                for(var i=0; i< car.length;i++){
+                    output += '<li>'+car[i].carID+'-----'+car[i].year+'-----'+car[i].make+'-----'+car[i].model+'-----'+car[i].Ranking_TotalScore+'</li>';
+
+                }
+                document.getElementById('car').innerHTML = output;
+
+                const data = {car};
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }
+                fetch('/api',options);
+            }
+        };
+        xhttp.open("GET", "data.json", true);
+        xhttp.send();
+
+    </script>
+</body>
+
+</html>
