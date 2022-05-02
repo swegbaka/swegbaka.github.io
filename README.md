@@ -24,6 +24,11 @@ You must have the following installed. In your OS command prompt type below:
   npm install express
   ```
   
+* NpmNedb
+  ```sh
+  npm install nedb
+  ```
+  
 ### Run
   
   To show the backend API, import all the file into VS Code and open JS_lab4.html
